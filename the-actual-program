@@ -28,7 +28,10 @@ void draw() {
    if (MouseX > 5*screen.width/8 && MouseX < 7*screen.width/8 && MouseY > 7*screen.height/16 && MouseY < screen.height/2 && MousePressed) {
       for (int k = 0; k < Numbers.length; k++) {
          for (int l = 0; l < Multipliers.length; l++) {
-            if (Numbers{k}*Multipliers{l} <1) {
+            if (Numbers{k}*Multipliers{l} < 1) {
+               Multipliers{l} = Multipliers{l} - 0.0001
+            }
+            if (Numbers{k}*Multipliers{l} > 1) {
                Multipliers{l} = Multipliers{l} + 0.0001
             }
          }
