@@ -1,0 +1,54 @@
+
+int IterationCount = 0;
+float[] Numbers = {0.2,0.5,0.3,0.4};
+float[] Multipliers = {0.4,0.3,0.5,0.2};
+String Display = "";
+String IterationText = "";
+
+void setup() {
+   size(screen.width, screen.height);
+   textAlign(CENTER);
+}
+
+void draw() {
+   // variable wrangling
+   Display = "";
+   for (int i = 0; i < Numbers.length; i++) {
+      for (int j = 0; j < Multipliers.length; j++) {
+         Display = Display + str(round(10000*Numbers{i}*Multipliers{j})/100) + "%";
+         if (j != Multipliers.length-1) {
+            Display = Display + " ";
+         }
+      }
+      if (i != Numbers.length-1) {
+         Display = Display + "\n";
+      }
+   }
+   // the actual neural grid
+   if (MouseX > 5*screen.width/8 && MouseX < 7*screen.width/8 && MouseY > 7*screen.height/16 && MouseY < screen.height/2 && MousePressed) {
+      for (int k = 0; k < Numbers.length; k++) {
+         for (int l = 0; l < Multipliers.length; l++) {
+            if (Numbers{k}*Multipliers{l} <1) {
+               Multipliers{l} = Multipliers{l} + 0.0001
+            }
+         }
+      }
+      IterationCount++;
+   }
+   IterationText = "Step: " + IterationCount + "\n";
+   // actual drawing
+   background(25,25,65);
+   fill(255,255,255);
+   textSize(60);
+   text("XQ's Nueral Grid [Omni I]", screen.width/2, screen.height/12);
+   textSize(24);
+   text("Goal: to make half of cells 100%", screen.width/2, screen.height/6);
+   text(Display, screen.width/2, screen.height/4);
+   text(IterationText, screen.width/4, screen.height/2);
+   fill(125,25,25);
+   rect(5*screen.width/8, 7*screen.height/16, screen.width/4, screen.height/16);
+   fill(255,255,255);
+   text("Hold for \niteration", 3*screen.width/4, 15*screen.height/32);
+   //fill(25,125,25);
+   //rect(5*screen.width/8, screen.height/2, screen.width/4, screen.height/16);
+}
